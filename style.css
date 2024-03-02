@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=The+Nautigal:wght@700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: rgba(0, 0, 0, .9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+:root {
+    --cell-size : 100px;
+    --mark-size : calc(var(--cell-size) * .9)
+}
+
+.head--of--document {
+    position: absolute;
+    top: 50px;
+    right: 120px;
+    font-size: 6rem;
+    color: #f890e7;
+    font-family: 'The Nautigal', cursive;
+    text-shadow: 2px 2px 	#0bd3d3;
+}
+
+/* First Scene!! */
+
+.first-scene {
+    width: 40%;
+    background-color: rgba(208, 208, 208, 0.342);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    transition: all .5 ease-in;
+    border-style: solid;
+    border-width: 8px;
+    border-image: linear-gradient(#0bd3d3, #f890e7) 30;
+    padding: 60px;
+}
+.option {
+    width: 26%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7.5rem;
+    font-family: 'Oswald', sans-serif;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+
+
+.option:nth-of-type(1) {
+    color: 	#f890e7;
+    border-right: 5px solid #4895EF;
+}
+.option:nth-of-type(2) {
+    border-left: 5px solid #4895EF;
+    color: 	#0bd3d3;
+}
+
+
+
+.scene-heading {
+    position: absolute;
+    top: 20px;
+    left: 230px;
+    font-size: 3rem;
+    font-family: 'Anton', sans-serif;
+    text-shadow: 4px 4px 	#0bd3d3;
+    color: 	#f890e7;
+}
+
+.option:hover {
+    width: 28%;
+    height: 53%;
+    border-color: #0bd3d3;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid 	#d0d0d0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* X and O scores */
+
+.scoreboard {
+    position: absolute;
+    top: 200px;
+    left: 670px;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 70px;
+    font-size: 2rem;
+    font-family: 'Oswald', sans-serif;
+    transition: all .5s ease;
+}
+.x-score {
+    color: #f890e7;
+} 
+.o-score {
+    color: #0bd3d3;
+}
+
+
+
+/* Remove borders!! */
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+.cell:first-child,
+.cell:nth-child(4),
+.cell:nth-child(7){
+    border-left: none;
+}
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+    border-right: none;
+}
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+    border-bottom: none;
+}
+
+/* Cursor not allowed */
+
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after
+{
+    background-color: #f890e7;
+}
+
+.cell.circle::before,
+.cell.circle::after {
+    border: 6px solid #0bd3d3;
+}
+
+/* Hover effects!! */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+/* .board.circle .cell:not(.x):not(.circle):hover::before { */
+    background-color: #f890e7;
+}
+
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    border: 6px solid #0bd3d3;
+}
+
+/* X! */
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    content: "";
+    position: absolute;
+    width: calc(var(--mark-size ) * .15);
+    height: var(--mark-size);
+}
+
+.cell::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(-45deg);
+}
+.cell::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(45deg);
+}
+
+/* O! */
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    /* border: 6px solid black; */
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    width: calc(var(--mark-size) * .9);
+    height: calc(var(--mark-size) * .9);
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    width: calc(var(--mark-size) * .8);
+    height: calc(var(--mark-size) * .8);
+}
+
+/* Winning Board!! */
+
+.winning-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    display: none;
+}
+.winning-message button {
+    font-size: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: .35em .7em;
+    cursor: pointer;
+    margin-top: 40px;
+    font-family: 'Oswald', sans-serif;
+    background-color: #f890e7;
+    color: #0bd3d3;
+    border-radius: 20px;
+    transition: all .2s ease-in-out;
+}
+.winning-message button:hover {
+    box-shadow: 2px 2px #0bd3d3;
+}
+.winning-message div {
+    color: #0bd3d3;
+    font-family: 'Oswald', sans-serif;
+}
+.winning-message.show {
+    display: flex;
+}
+@media(max-width:1414px) {
+    .first-scene {
+        width: 50%;
+        height: auto;
+        padding: 50px 20px;
+    }
+    .first-scene .option {
+        margin: 0;
+    }
+    .scene-heading {
+        position: absolute;
+        top: 40px;
+        left: 190px;
+        font-size: 2.5rem;
+        font-family: 'Anton', sans-serif;
+        text-shadow: 4px 4px 	#0bd3d3;
+        color: 	#f890e7;
+    }
+}
+@media(max-width:932px) {
+    .first-scene {
+        width: 90%;
+    }
+    .head--of--document {
+        top: 20px;
+    }
+    .scene-heading {
+        font-size: 2rem;
+        top: 60px;
+    }
+}
+@media(max-width:658px) {
+    .scene-heading {
+        font-size: 2rem;
+        left: 100px;
+    }
+    .option {
+        width: 20%;
+        height: 30%;
+    }
+    .first-scene {
+        flex-direction: column;
+    }
+    .option {
+        border: none !important;
+    }
+    .option:nth-of-type(1) {
+        border-bottom: 5px solid #4895EF !important;
+        width: 80%;
+    }
+    .option:nth-of-type(1):hover {
+        border-color: #0bd3d3 !important;
+    }
+}
